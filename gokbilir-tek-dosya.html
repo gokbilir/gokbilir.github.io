@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gökbilir — Günlük Burç, Tarot, Testler ve Rehberler</title>
+<meta name="description" content="12 burç için günlük yorumlar, tarot çarkı, kişilik testleri, bebek isimleri ve rüya tabirleri — kategorilere ayrılmış tek adres.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1029;
+    --bg-deep:#070919;
+    --card:#161a3d;
+    --card-line:#2c3163;
+    --pink:#f4bfd0;
+    --pink-dim:#c98fa3;
+    --pink-soft:rgba(244,191,208,0.12);
+    --text:#e6e3f4;
+    --text-dim:#9490b8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  .display{font-family:'Spectral', serif;}
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.06em;}
+
+  /* starfield */
+  .stars{
+    position:fixed; inset:0; z-index:-2;
+    background:var(--bg-deep);
+  }
+  .stars::before, .stars::after{
+    content:''; position:absolute; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+      radial-gradient(1px 1px at 65% 15%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 80% 65%, #fff, transparent),
+      radial-gradient(1px 1px at 40% 80%, #fff, transparent),
+      radial-gradient(1px 1px at 90% 40%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 10% 60%, #fff, transparent),
+      radial-gradient(1px 1px at 55% 50%, #fff, transparent),
+      radial-gradient(1px 1px at 30% 10%, #fff, transparent);
+    background-repeat:repeat;
+    background-size:400px 400px;
+    opacity:0.35;
+  }
+  .stars::after{
+    background-size:600px 600px;
+    background-position:100px 200px;
+    opacity:0.2;
+  }
+
+  /* clouds */
+  .sky-clouds{
+    position:fixed; inset:0; z-index:-1;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .cloud{
+    position:absolute;
+    background:var(--pink-soft);
+    border-radius:100px;
+    filter:blur(1px);
+  }
+  .cloud::before, .cloud::after{
+    content:'';
+    position:absolute;
+    background:inherit;
+    border-radius:50%;
+  }
+  .cloud-1{ width:220px; height:60px; top:8%; left:-25%; opacity:0.5; animation:drift 70s linear infinite; }
+  .cloud-1::before{ width:110px; height:110px; top:-55px; left:15px; }
+  .cloud-1::after{ width:90px; height:90px; top:-40px; right:20px; }
+  .cloud-2{ width:160px; height:44px; top:32%; left:-20%; opacity:0.35; animation:drift 95s linear infinite; animation-delay:-30s; }
+  .cloud-2::before{ width:80px; height:80px; top:-40px; left:10px; }
+  .cloud-2::after{ width:64px; height:64px; top:-28px; right:14px; }
+  .cloud-3{ width:280px; height:70px; top:62%; left:-30%; opacity:0.4; animation:drift 120s linear infinite; animation-delay:-60s; }
+  .cloud-3::before{ width:130px; height:130px; top:-65px; left:25px; }
+  .cloud-3::after{ width:100px; height:100px; top:-45px; right:30px; }
+  .cloud-4{ width:180px; height:48px; top:80%; left:-22%; opacity:0.3; animation:drift 85s linear infinite; animation-delay:-15s; }
+  .cloud-4::before{ width:90px; height:90px; top:-44px; left:12px; }
+  .cloud-4::after{ width:70px; height:70px; top:-30px; right:16px; }
+
+  @keyframes drift{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(160vw); }
+  }
+
+  /* header */
+  header{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:28px 6vw;
+    border-bottom:1px solid var(--card-line);
+  }
+  .logo{
+    font-family:'Spectral', serif;
+    font-size:1.4rem;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .logo span{color:var(--pink);}
+  nav ul{display:flex; gap:36px; list-style:none;}
+  nav a{
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-dim);
+    transition:color 0.2s;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--pink);}
+
+  /* hero */
+  .hero{
+    padding:9vh 6vw 7vh;
+    max-width:900px;
+  }
+  .hero .eyebrow{
+    color:var(--pink);
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    margin-bottom:18px;
+    display:block;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 5vw, 3.8rem);
+    font-weight:400;
+    line-height:1.15;
+    margin-bottom:24px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--pink);
+  }
+  .hero p{
+    color:var(--text-dim);
+    font-size:1.05rem;
+    max-width:560px;
+    margin-bottom:32px;
+  }
+  .btn{
+    display:inline-block;
+    border:1px solid var(--pink);
+    background:transparent;
+    color:var(--pink);
+    padding:14px 30px;
+    font-size:0.85rem;
+    font-family:'Work Sans', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    cursor:pointer;
+    transition:all 0.25s;
+  }
+  .btn:hover, .btn:focus-visible{
+    background:var(--pink);
+    color:var(--bg-deep);
+  }
+  .btn:disabled{ opacity:0.5; cursor:not-allowed; }
+
+  /* ad slot */
+  .ad-slot{
+    margin:0 6vw;
+    border:1px dashed var(--card-line);
+    color:var(--text-dim);
+    font-size:0.75rem;
+    text-align:center;
+    padding:18px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .ad-slot.banner{ min-height:90px; display:flex; align-items:center; justify-content:center; }
+  .ad-slot.incontent{ margin:64px 6vw; min-height:250px; display:flex; align-items:center; justify-content:center; }
+
+  /* section headers */
+  .section{ padding:8vh 6vw; }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:48px;
+    border-bottom:1px solid var(--card-line);
+    padding-bottom:20px;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .section-head h2{
+    font-family:'Spectral', serif;
+    font-weight:500;
+    font-size:1.9rem;
+  }
+  .section-head .today{
+    color:var(--pink-dim);
+    font-size:0.8rem;
+  }
+
+  /* zodiac wheel */
+  .wheel-wrap{
+    display:flex; gap:60px; align-items:center; flex-wrap:wrap;
+    justify-content:center;
+  }
+  .wheel{
+    position:relative;
+    width:min(58vw, 460px);
+    height:min(58vw, 460px);
+    flex-shrink:0;
+  }
+  .wheel-ring{
+    position:absolute; inset:0;
+    border:1px solid var(--card-line);
+    border-radius:50%;
+  }
+  .wheel-ring.inner{ inset:15%; border-color:#20244a; }
+  .wheel-center{
+    position:absolute; inset:38%;
+    border:1px solid var(--pink-dim);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Spectral', serif;
+    font-size:2rem;
+    color:var(--pink);
+    background:radial-gradient(circle, rgba(244,191,208,0.1), transparent 70%);
+  }
+  .sign-node{
+    position:absolute;
+    top:50%; left:50%;
+    width:52px; height:52px;
+    margin:-26px 0 0 -26px;
+    border-radius:50%;
+    background:var(--card);
+    border:1px solid var(--card-line);
+    color:var(--text-dim);
+    font-size:1.3rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:all 0.25s;
+  }
+  .sign-node:hover, .sign-node:focus-visible{
+    border-color:var(--pink);
+    color:var(--pink);
+    transform:scale(1.12);
+  }
+  .sign-node.active{
+    background:var(--pink);
+    border-color:var(--pink);
+    color:var(--bg-deep);
+  }
+
+  .panel{
+    flex:1; min-width:280px; max-width:480px;
+    background:var(--card);
+    border:1px solid var(--card-line);
+    padding:36px;
+  }
+  .panel .glyph{ font-size:2.2rem; color:var(--pink); }
+  .panel h3{
+    font-family:'Spectral', serif;
+    font-size:1.6rem;
+    font-weight:500;
+    margin:10px 0 4px;
+  }
+  .panel .dates{
+    color:var(--text-dim);
+    font-size:0.8rem;
+    margin-bottom:20px;
+  }
+  .panel p.body-text{
+    color:var(--text);
+    margin-bottom:20px;
+  }
+  .panel .meta{
+    display:flex; gap:28px;
+    border-top:1px solid var(--card-line);
+    padding-top:18px;
+    font-size:0.75rem;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .panel .meta strong{ color:var(--pink); display:block; font-size:0.9rem; text-transform:none; font-family:'Spectral', serif; margin-top:2px;}
+
+  /* tarot wheel */
+  .tarot-section-inner{
+    display:flex; gap:60px; align-items:center; flex-wrap:wrap;
+    justify-content:center;
+  }
+  .tarot-wheel-outer{
+    position:relative;
+    width:min(64vw, 400px);
+    height:min(64vw, 400px);
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .tarot-pointer{
+    position:absolute;
+    top:-6px; left:50%;
+    transform:translateX(-50%);
+    color:var(--pink);
+    font-size:1.6rem;
+    z-index:5;
+    filter:drop-shadow(0 0 6px rgba(244,191,208,0.6));
+  }
+  .tarot-wheel{
+    width:100%; height:100%;
+    border-radius:50%;
+    border:2px solid var(--pink-dim);
+    position:relative;
+    box-shadow:0 0 40px rgba(244,191,208,0.12);
+  }
+  .tarot-node{
+    position:absolute;
+    top:50%; left:50%;
+    width:30px; height:30px;
+    margin:-15px 0 0 -15px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.95rem;
+    pointer-events:none;
+  }
+  .tarot-hub{
+    position:absolute; inset:42%;
+    border-radius:50%;
+    background:var(--bg-deep);
+    border:1px solid var(--pink-dim);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem;
+    z-index:3;
+  }
+  .tarot-controls{
+    display:flex; flex-direction:column; align-items:center; gap:24px;
+  }
+  .tarot-result{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    padding:32px;
+    max-width:420px;
+    min-height:120px;
+    text-align:center;
+  }
+  .tarot-result .card-name{
+    font-family:'Spectral', serif;
+    font-size:1.5rem;
+    color:var(--pink);
+    margin-bottom:10px;
+  }
+  .tarot-result p{ color:var(--text-dim); }
+  .tarot-result .placeholder{ color:var(--text-dim); font-style:italic; }
+
+  /* isim rehberi */
+  .name-controls{
+    display:flex; gap:12px; flex-wrap:wrap; margin-bottom:32px;
+  }
+  .name-tab{
+    background:transparent;
+    border:1px solid var(--card-line);
+    color:var(--text-dim);
+    padding:10px 22px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.85rem;
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  .name-tab.active{
+    border-color:var(--pink);
+    color:var(--pink);
+    background:var(--pink-soft);
+  }
+  .name-search{
+    flex:1; min-width:200px;
+    background:var(--card);
+    border:1px solid var(--card-line);
+    color:var(--text);
+    padding:10px 18px;
+    font-family:'Work Sans', sans-serif;
+  }
+  .name-search:focus-visible{ outline:1px solid var(--pink); }
+  .name-count{
+    color:var(--text-dim);
+    font-size:0.8rem;
+    margin-bottom:20px;
+  }
+  .name-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:14px;
+  }
+  .name-item{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    padding:16px 18px;
+  }
+  .name-item .n{
+    font-family:'Spectral', serif;
+    font-size:1.1rem;
+    color:var(--pink);
+    margin-bottom:4px;
+  }
+  .name-item .m{
+    font-size:0.85rem;
+    color:var(--text-dim);
+  }
+  .name-empty{
+    color:var(--text-dim);
+    font-style:italic;
+    padding:20px 0;
+  }
+  .dream-search-wrap{
+    position:relative;
+    flex:1;
+    min-width:220px;
+    display:flex;
+    align-items:center;
+  }
+  .dream-search-wrap .dream-search-icon{
+    position:absolute;
+    left:16px;
+    font-size:0.9rem;
+    opacity:0.6;
+    pointer-events:none;
+  }
+  .dream-search-wrap .name-search{
+    width:100%;
+    padding-left:42px;
+  }
+
+  /* paylaşım, rozet, uyum, öneri */
+  .share-row{
+    display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;
+  }
+  .share-btn{
+    background:transparent;
+    border:1px solid var(--card-line);
+    color:var(--text-dim);
+    padding:8px 16px;
+    font-size:0.75rem;
+    font-family:'Work Sans', sans-serif;
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  .share-btn:hover{ border-color:var(--pink); color:var(--pink); }
+  .seen-badge{
+    display:inline-block;
+    background:var(--pink-soft);
+    border:1px solid var(--pink-dim);
+    color:var(--pink);
+    font-size:0.72rem;
+    padding:4px 12px;
+    margin-bottom:16px;
+  }
+  .match-wrap{
+    display:flex; gap:20px; flex-wrap:wrap; align-items:flex-end; margin-bottom:28px;
+  }
+  .match-field{ display:flex; flex-direction:column; gap:8px; }
+  .match-field label{ font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; }
+  .match-field select{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    color:var(--text);
+    padding:10px 14px;
+    font-family:'Work Sans', sans-serif;
+    min-width:160px;
+  }
+  .match-result{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    padding:32px;
+    max-width:520px;
+  }
+  .match-result .pct{
+    font-family:'Spectral', serif;
+    font-size:2.4rem;
+    color:var(--pink);
+  }
+  .suggest-wrap{
+    display:flex; gap:16px; flex-wrap:wrap; align-items:flex-end; margin-bottom:28px;
+  }
+  .suggest-wrap select, .suggest-wrap input{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    color:var(--text);
+    padding:10px 14px;
+    font-family:'Work Sans', sans-serif;
+  }
+  .quiz-list{
+    display:flex; flex-direction:column; gap:2px;
+    background:var(--card-line);
+    border:1px solid var(--card-line);
+    margin-bottom:24px;
+  }
+  .quiz-item{
+    background:var(--bg);
+    padding:16px 18px;
+    display:flex; align-items:center; gap:14px;
+    cursor:pointer;
+  }
+  .quiz-item input{ width:18px; height:18px; accent-color:var(--pink); flex-shrink:0; }
+  .quiz-item span{ font-size:0.92rem; color:var(--text); }
+  .quiz-result{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    padding:32px;
+    max-width:560px;
+  }
+  .quiz-result .type-name{
+    font-family:'Spectral', serif;
+    font-size:1.6rem;
+    color:var(--pink);
+    margin-bottom:12px;
+  }
+
+  /* article cards */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:1px;
+    background:var(--card-line);
+    border:1px solid var(--card-line);
+  }
+  .card{
+    background:var(--bg);
+    padding:32px;
+  }
+  .card .tag{
+    color:var(--pink);
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-bottom:14px;
+    display:block;
+  }
+  .card h3{
+    font-family:'Spectral', serif;
+    font-size:1.25rem;
+    font-weight:500;
+    margin-bottom:12px;
+    line-height:1.35;
+  }
+  .card p{ color:var(--text-dim); font-size:0.92rem; }
+
+  /* newsletter */
+  .newsletter{
+    background:var(--card);
+    border-top:1px solid var(--card-line);
+    border-bottom:1px solid var(--card-line);
+    padding:7vh 6vw;
+    text-align:center;
+  }
+  .newsletter h2{
+    font-family:'Spectral', serif;
+    font-size:1.8rem;
+    font-weight:500;
+    margin-bottom:14px;
+  }
+  .newsletter p{ color:var(--text-dim); max-width:480px; margin:0 auto 28px; }
+  .newsletter form{
+    display:flex; justify-content:center; gap:12px; flex-wrap:wrap;
+  }
+  .newsletter input[type="email"]{
+    background:var(--bg);
+    border:1px solid var(--card-line);
+    color:var(--text);
+    padding:14px 18px;
+    font-family:'Work Sans', sans-serif;
+    min-width:260px;
+  }
+  .newsletter input[type="email"]:focus-visible{ outline:1px solid var(--pink); }
+
+  footer{
+    padding:6vh 6vw 4vh;
+    color:var(--text-dim);
+    font-size:0.8rem;
+  }
+  footer .foot-top{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;
+    padding-bottom:32px; margin-bottom:24px;
+    border-bottom:1px solid var(--card-line);
+  }
+  footer .disclaimer{ max-width:520px; }
+  footer .foot-links{ display:flex; gap:24px; flex-wrap:wrap; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  @media (max-width:640px){
+    nav ul{ gap:18px; }
+    nav a{ font-size:0.72rem; }
+    .wheel-wrap, .tarot-section-inner{ gap:36px; }
+  }
+
+  /* ---------- Kategori Kartları (Ana Sayfa) ---------- */
+  .cat-group{ margin-bottom:64px; }
+  .cat-group:last-child{ margin-bottom:0; }
+  .cat-group-label{
+    color:var(--pink-dim);
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    margin-bottom:20px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .cat-group-label::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--card-line);
+  }
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:1px;
+    background:var(--card-line);
+    border:1px solid var(--card-line);
+  }
+  .cat-card{
+    background:var(--bg);
+    padding:32px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    transition:background 0.2s;
+    cursor:pointer;
+  }
+  .cat-card:hover, .cat-card:focus-visible{
+    background:var(--card);
+  }
+  .cat-card .glyph{
+    font-size:1.8rem;
+    color:var(--pink);
+  }
+  .cat-card h3{
+    font-family:'Spectral', serif;
+    font-size:1.2rem;
+    font-weight:500;
+  }
+  .cat-card p{
+    color:var(--text-dim);
+    font-size:0.88rem;
+    flex:1;
+  }
+  .cat-card .go{
+    color:var(--pink-dim);
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .cat-card:hover .go, .cat-card:focus-visible .go{ color:var(--pink); }
+
+  /* ---------- Alt Sayfa Başlığı ---------- */
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--text-dim);
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:18px;
+    transition:color 0.2s;
+  }
+  .back-link:hover, .back-link:focus-visible{ color:var(--pink); }
+  .page-hero{
+    padding:6vh 6vw 2vh;
+    max-width:900px;
+  }
+  .page-hero .eyebrow{
+    color:var(--pink);
+    font-size:0.8rem;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    margin-bottom:14px;
+    display:block;
+  }
+  .page-hero h1{
+    font-family:'Spectral', serif;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    font-weight:400;
+    line-height:1.2;
+    margin-bottom:14px;
+  }
+  .page-hero p{
+    color:var(--text-dim);
+    font-size:1rem;
+    max-width:560px;
+  }
+
+
+  /* ---------- SPA Sayfa Geçişi ---------- */
+  .page{ display:none; }
+  .page.active{ display:block; }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="sky-clouds">
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="cloud cloud-3"></div>
+  <div class="cloud cloud-4"></div>
+</div>
+
+<header>
+  <a href="#" class="logo" data-target="home">GÖK<span>·</span>BİLİR</a>
+  <nav>
+    <ul>
+      <li><a href="#" data-target="burclar">Burçlar</a></li>
+      <li><a href="#" data-target="tarot">Tarot</a></li>
+      <li><a href="#" data-target="uyum">Uyum</a></li>
+      <li><a href="#" data-target="enneagram">Enneagram</a></li>
+      <li><a href="#" data-target="gecmisyasam">Geçmiş Yaşam</a></li>
+      <li><a href="#" data-target="isimler">İsimler</a></li>
+      <li><a href="#" data-target="ruya">Rüya Tabiri</a></li>
+      <li><a href="#" data-target="yazilar">Yazılar</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<div class="page active" id="page-home">
+<section class="hero">
+  <span class="eyebrow mono">Günlük Gökyüzü Rehberi</span>
+  <h1>Yıldızlar konuşur, <em>sen</em> nasıl dinleyeceğini bilirsin.</h1>
+  <p>12 burç için her gün güncellenen yorumlar, tarot çarkı, kişilik testleri, isim rehberi ve rüya tabirleri — hepsi kendi sayfasında, aradığını kolayca bul.</p>
+  <a href="#kategoriler" class="btn">Kategorilere Göz At</a>
+</section>
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="kategoriler">
+
+  <div class="cat-group">
+    <div class="cat-group-label mono">Günlük Gökyüzü</div>
+    <div class="cat-grid">
+      <a class="cat-card" href="#" data-target="burclar">
+        <span class="glyph">☉</span>
+        <h3 class="display">Günlük Burç Yorumu</h3>
+        <p>12 burç için her gün güncellenen yorumlar; şanslı sayın ve rengin de dahil.</p>
+        <span class="go">İncele →</span>
+      </a>
+      <a class="cat-card" href="#" data-target="tarot">
+        <span class="glyph">🔮</span>
+        <h3 class="display">Günün Tarot Kartı</h3>
+        <p>Çarkı çevir, günün kartını ve mesajını keşfet.</p>
+        <span class="go">İncele →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="cat-group">
+    <div class="cat-group-label mono">Testler</div>
+    <div class="cat-grid">
+      <a class="cat-card" href="#" data-target="uyum">
+        <span class="glyph">💞</span>
+        <h3 class="display">Burç Uyumu</h3>
+        <p>İki burç seç, aranızdaki uyum yüzdesini ve notunu gör.</p>
+        <span class="go">İncele →</span>
+      </a>
+      <a class="cat-card" href="#" data-target="enneagram">
+        <span class="glyph">🧭</span>
+        <h3 class="display">Enneagram Testi</h3>
+        <p>Sana en çok uyan ifadeleri seç, 9 tipten hangisine yakın olduğunu öğren.</p>
+        <span class="go">İncele →</span>
+      </a>
+      <a class="cat-card" href="#" data-target="gecmisyasam">
+        <span class="glyph">⏳</span>
+        <h3 class="display">Bir Önceki Hayatında Kimdin?</h3>
+        <p>6 soruluk kısa bir testle geçmiş yaşamını keşfet.</p>
+        <span class="go">İncele →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="cat-group">
+    <div class="cat-group-label mono">Rehberler</div>
+    <div class="cat-grid">
+      <a class="cat-card" href="#" data-target="isimler">
+        <span class="glyph">👶</span>
+        <h3 class="display">Bebek İsmi Rehberi</h3>
+        <p>Kız ve erkek isimleri, anlamlarıyla; ara, sırala ya da sana isim önertir.</p>
+        <span class="go">İncele →</span>
+      </a>
+      <a class="cat-card" href="#" data-target="ruya">
+        <span class="glyph">🌙</span>
+        <h3 class="display">Rüya Tabirleri</h3>
+        <p>Rüyanda gördüğün temayı ara, halk kültüründeki anlamını öğren.</p>
+        <span class="go">İncele →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="cat-group">
+    <div class="cat-group-label mono">İçerik</div>
+    <div class="cat-grid">
+      <a class="cat-card" href="#" data-target="yazilar">
+        <span class="glyph">📰</span>
+        <h3 class="display">Öne Çıkan Yazılar</h3>
+        <p>Burç uyumu, gezegen retroları ve tarot üzerine rehber yazılar.</p>
+        <span class="go">İncele →</span>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<div class="ad-slot incontent">Reklam Alanı — İçerik İçi (300×250 veya duyarlı)</div>
+
+<div class="newsletter" id="bulten">
+  <h2 class="display">Haftalık yorumlar kutuna gelsin</h2>
+  <p>Her Pazar, haftanın öne çıkan gökyüzü hareketleri ve burcunla ilgili özel notlar.</p>
+  <form id="newsletterForm">
+    <input type="email" id="newsletterEmail" placeholder="E-posta adresin" required>
+    <button type="submit" class="btn">Abone Ol</button>
+  </form>
+  <p id="newsletterNote" style="margin-top:14px; font-size:0.75rem; color:var(--text-dim);"></p>
+</div>
+
+
+</div>
+<div class="page" id="page-burclar">
+<div class="page-hero">
+  <a href="#" data-target="home" class="back-link">← Ana Sayfa</a>
+  <span class="eyebrow mono">Günlük Gökyüzü</span>
+  <h1 class="display">Bugünün Burç Yorumu</h1>
+  <p>Burcunu seç, güne dair mesajını, şanslı sayını ve rengini gör.</p>
+</div>
+
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="wheel">
+  <div class="section-head">
+    <h2 class="display">Bugünün Yorumu</h2>
+    <span class="today mono" id="todayLabel"></span>
+  </div>
+
+  <div id="seenBadgeWrap"></div>
+
+  <div class="wheel-wrap">
+    <div class="wheel" id="wheelEl">
+      <div class="wheel-ring"></div>
+      <div class="wheel-ring inner"></div>
+      <div class="wheel-center">☉</div>
+    </div>
+
+    <div class="panel" id="panel"></div>
+  </div>
+</section>
+
+
+</div>
+<div class="page" id="page-tarot">
+<div class="page-hero">
+  <a href="#" data-target="home" class="back-link">← Ana Sayfa</a>
+  <span class="eyebrow mono">Günlük Gökyüzü</span>
+  <h1 class="display">Günün Tarot Kartı</h1>
+  <p>Çarkı çevirerek günün kartını öğren.</p>
+</div>
+
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="tarot">
+  <div class="tarot-section-inner">
+    <div class="tarot-wheel-outer">
+      <div class="tarot-pointer">▼</div>
+      <div class="tarot-wheel" id="tarotWheel"></div>
+      <div class="tarot-hub">🔮</div>
+    </div>
+
+    <div class="tarot-controls">
+      <button class="btn" id="spinBtn">Çarkı Çevir</button>
+      <div class="tarot-result" id="tarotResult">
+        <p class="placeholder">Çarkı çevirerek günün kartını öğren.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</div>
+<div class="page" id="page-uyum">
+<div class="page-hero">
+  <a href="#" data-target="home" class="back-link">← Ana Sayfa</a>
+  <span class="eyebrow mono">Testler</span>
+  <h1 class="display">Burç Uyumu</h1>
+  <p>İki burç seç, uyumunu hesapla.</p>
+</div>
+
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="uyum">
+  <div class="match-wrap">
+    <div class="match-field">
+      <label>1. Burç</label>
+      <select id="matchSign1"></select>
+    </div>
+    <div class="match-field">
+      <label>2. Burç</label>
+      <select id="matchSign2"></select>
+    </div>
+    <button class="btn" id="matchBtn">Uyumu Hesapla</button>
+  </div>
+
+  <div class="match-result" id="matchResult">
+    <p class="placeholder" style="color:var(--text-dim); font-style:italic;">İki burç seçip uyumu hesapla.</p>
+  </div>
+</section>
+
+
+</div>
+<div class="page" id="page-enneagram">
+<div class="page-hero">
+  <a href="#" data-target="home" class="back-link">← Ana Sayfa</a>
+  <span class="eyebrow mono">Testler</span>
+  <h1 class="display">Enneagram Testi</h1>
+  <p>Sana en çok uyanları seç, sonucunu gör.</p>
+</div>
+
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="enneagram">
+  <div class="quiz-list" id="quizList"></div>
+  <button class="btn" id="quizBtn">Sonucu Gör</button>
+
+  <div class="quiz-result" id="quizResult" style="margin-top:24px; display:none;"></div>
+
+  <p style="color:var(--text-dim); font-size:0.8rem; margin-top:24px;">Bu test eğlence ve öz farkındalık amaçlıdır, profesyonel bir kişilik değerlendirmesi yerine geçmez.</p>
+</section>
+
+
+</div>
+<div class="page" id="page-gecmisyasam">
+<div class="page-hero">
+  <a href="#" data-target="home" class="back-link">← Ana Sayfa</a>
+  <span class="eyebrow mono">Testler</span>
+  <h1 class="display">Bir Önceki Hayatında Kimdin?</h1>
+  <p>6 soru, saniyeler sürer.</p>
+</div>
+
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="gecmisyasam">
+  <div id="plQuizWrap"></div>
+  <button class="btn" id="plQuizBtn">Sonucu Gör</button>
+
+  <div class="quiz-result" id="plQuizResult" style="margin-top:24px; display:none;"></div>
+
+  <p style="color:var(--text-dim); font-size:0.8rem; margin-top:24px;">Sadece eğlence amaçlıdır, tarihsel ya da bilimsel bir iddiası yoktur.</p>
+</section>
+
+
+</div>
+<div class="page" id="page-isimler">
+<div class="page-hero">
+  <a href="#" data-target="home" class="back-link">← Ana Sayfa</a>
+  <span class="eyebrow mono">Rehberler</span>
+  <h1 class="display">İsim Rehberi</h1>
+  <p>Kız ve erkek isimlerini anlamlarıyla keşfet, aratıp sırala ya da sana öneri al.</p>
+</div>
+
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="isimler">
+  <div class="section-head" style="justify-content:flex-end;">
+    <span class="today mono" id="nameCount"></span>
+  </div>
+
+  <div class="name-controls">
+    <button class="name-tab active" data-gender="kiz">Kız İsimleri</button>
+    <button class="name-tab" data-gender="erkek">Erkek İsimleri</button>
+    <button class="name-tab" id="sortToggle">A-Z Sırala</button>
+    <input type="text" class="name-search" id="nameSearch" placeholder="İsim ara...">
+  </div>
+
+  <div class="name-grid" id="nameGrid"></div>
+
+  <div style="margin-top:56px; padding-top:40px; border-top:1px solid var(--card-line);">
+    <h3 class="display" style="font-size:1.3rem; margin-bottom:18px;">Bebek İsmi Önerici</h3>
+    <div class="suggest-wrap">
+      <select id="suggestGender">
+        <option value="kiz">Kız</option>
+        <option value="erkek">Erkek</option>
+      </select>
+      <select id="suggestLetter">
+        <option value="">Harf farketmez</option>
+      </select>
+      <button class="btn" id="suggestBtn">Bana Öner</button>
+    </div>
+    <div class="name-grid" id="suggestGrid"></div>
+  </div>
+</section>
+
+
+</div>
+<div class="page" id="page-ruya">
+<div class="page-hero">
+  <a href="#" data-target="home" class="back-link">← Ana Sayfa</a>
+  <span class="eyebrow mono">Rehberler</span>
+  <h1 class="display">Rüya Tabirleri</h1>
+  <p>Rüyanda ne gördüysen ara, geleneksel anlamını gör.</p>
+</div>
+
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="ruya">
+  <div class="section-head" style="justify-content:flex-end;">
+    <span class="today mono" id="dreamCount"></span>
+  </div>
+
+  <div class="name-controls">
+    <div class="dream-search-wrap">
+      <span class="dream-search-icon">🔍</span>
+      <input type="text" class="name-search" id="dreamSearch" placeholder="Rüyanda ne gördün? (örn. yılan, su, uçmak...)">
+    </div>
+  </div>
+
+  <div class="name-grid" id="dreamGrid"></div>
+  <p style="color:var(--text-dim); font-size:0.8rem; margin-top:24px;">Bu yorumlar halk kültüründeki geleneksel rüya tabiri anlayışına dayanır, bilimsel bir dayanağı yoktur.</p>
+</section>
+
+
+</div>
+<div class="page" id="page-yazilar">
+<div class="page-hero">
+  <a href="#" data-target="home" class="back-link">← Ana Sayfa</a>
+  <span class="eyebrow mono">İçerik</span>
+  <h1 class="display">Öne Çıkan Yazılar</h1>
+  <p>Burçlar, gezegenler ve tarot üzerine kısa rehberler.</p>
+</div>
+
+
+<div class="ad-slot banner">Reklam Alanı — 728×90 (AdSense kodu buraya yerleştirilecek)</div>
+
+<section class="section" id="yazilar">
+  <div class="cards">
+    <div class="card">
+      <span class="tag mono">Uyum</span>
+      <h3>Hangi burçlar birbirini tamamlar?</h3>
+      <p>Element gruplarına göre uyum dinamiklerini ve ilişkilerde denge kurmanın yollarını inceliyoruz.</p>
+    </div>
+    <div class="card">
+      <span class="tag mono">Gezegenler</span>
+      <h3>Merkür retrosu döneminde nelere dikkat etmeli?</h3>
+      <p>İletişim, seyahat ve teknolojiyle ilgili kararları bu dönemde nasıl ele almalısın, adım adım anlatıyoruz.</p>
+    </div>
+    <div class="card">
+      <span class="tag mono">Rehber</span>
+      <h3>Tarot kartları gerçekten ne anlatır?</h3>
+      <p>Majör arkananın 22 kartının kökenini ve günlük hayata nasıl uygulanabileceğini keşfet.</p>
+    </div>
+  </div>
+</section>
+
+
+</div>
+</main>
+
+<footer>
+  <div class="foot-top">
+    <div class="disclaimer">
+      <strong class="display" style="color:var(--pink); font-size:1.1rem;">GÖK·BİLİR</strong>
+      <p style="margin-top:10px;">İçerikler eğlence ve rehberlik amaçlıdır, profesyonel tavsiye yerine geçmez.</p>
+    </div>
+    <div class="foot-links">
+      <a href="#" data-target="home">Ana Sayfa</a>
+      <a href="#" data-target="burclar">Burçlar</a>
+      <a href="#" data-target="yazilar">Yazılar</a>
+    </div>
+  </div>
+  <div class="ad-slot" style="margin:0 0 20px;">Reklam Alanı — Alt Bilgi (Duyarlı)</div>
+  <span class="mono">© <span id="year"></span> Gökbilir</span>
+</footer>
+
+
+<script>
+/* ---------- Ortak Yardımcılar ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function shareOrCopy(text, btn){
+  if (navigator.share){
+    navigator.share({ text }).catch(() => {});
+    return;
+  }
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Kopyalandı ✓';
+    setTimeout(() => { btn.textContent = original; }, 1800);
+  });
+}
+
+
+/* ---------- Burç Verisi ---------- */
+const signs = [
+  {name:"Koç", glyph:"♈", dates:"21 Mart – 19 Nisan", element:"Ateş", planet:"Mars",
+   text:"Bugün enerjin yüksek, ama sabırsızlığın seni aceleci kararlara sürükleyebilir. Önce dinle, sonra harekete geç."},
+  {name:"Boğa", glyph:"♉", dates:"20 Nisan – 20 Mayıs", element:"Toprak", planet:"Venüs",
+   text:"Konfor alanından çıkmak zor gelse de, bugün küçük bir değişiklik uzun vadede işine yarayacak."},
+  {name:"İkizler", glyph:"♊", dates:"21 Mayıs – 20 Haziran", element:"Hava", planet:"Merkür",
+   text:"Zihnin bugün birçok yöne dağılabilir. Tek bir konuşmaya odaklanmak sana beklenenden fazlasını verir."},
+  {name:"Yengeç", glyph:"♋", dates:"21 Haziran – 22 Temmuz", element:"Su", planet:"Ay",
+   text:"Duygusal hafızan bugün güçlü. Geçmişten bir ders çıkarmak, bugünkü bir kararını netleştirebilir."},
+  {name:"Aslan", glyph:"♌", dates:"23 Temmuz – 22 Ağustos", element:"Ateş", planet:"Güneş",
+   text:"Takdir görmek istiyorsun ama bugün asıl güç, sessizce yaptığın işin kalitesinde saklı."},
+  {name:"Başak", glyph:"♍", dates:"23 Ağustos – 22 Eylül", element:"Toprak", planet:"Merkür",
+   text:"Mükemmeliyetçiliğin bugün seni yavaşlatabilir. Yeterince iyi olan, bazen gerçekten yeterlidir."},
+  {name:"Terazi", glyph:"♎", dates:"23 Eylül – 22 Ekim", element:"Hava", planet:"Venüs",
+   text:"Bir karardan kaçınmak da bir karardır. Bugün net bir tercih yapmak sana huzur getirecek."},
+  {name:"Akrep", glyph:"♏", dates:"23 Ekim – 21 Kasım", element:"Su", planet:"Plüton",
+   text:"Yüzeyin altında bir şeyler kaynıyor. Bugün doğrudan konuşmak, sessiz gerginlikten daha hafif gelecek."},
+  {name:"Yay", glyph:"♐", dates:"22 Kasım – 21 Aralık", element:"Ateş", planet:"Jüpiter",
+   text:"Ufkunu genişletecek bir fikir bugün karşına çıkabilir. Onu hemen yargılamadan dinlemeye çalış."},
+  {name:"Oğlak", glyph:"♑", dates:"22 Aralık – 19 Ocak", element:"Toprak", planet:"Satürn",
+   text:"Disiplinin bugün seni ileri taşıyor, ama biraz esneklik göstermek başarını tehlikeye atmaz."},
+  {name:"Kova", glyph:"♒", dates:"20 Ocak – 18 Şubat", element:"Hava", planet:"Uranüs",
+   text:"Farklı düşünmek bugün senin gücün. Grup içinde bile kendi sesini korumaktan çekinme."},
+  {name:"Balık", glyph:"♓", dates:"19 Şubat – 20 Mart", element:"Su", planet:"Neptün",
+   text:"Sezgilerin bugün mantığından daha isabetli olabilir. İçinden gelen sessiz sesi görmezden gelme."}
+];
+
+/* ---------- Burç Çarkı ---------- */
+
+
+const wheel = document.getElementById('wheelEl');
+const panel = document.getElementById('panel');
+
+function renderSignNodes(){
+  document.querySelectorAll('.sign-node').forEach(n => n.remove());
+  const r = wheel.offsetWidth * 0.42;
+  signs.forEach((s, i) => {
+    const angle = (i / signs.length) * 2 * Math.PI - Math.PI / 2;
+    const x = Math.cos(angle) * r;
+    const y = Math.sin(angle) * r;
+    const btn = document.createElement('button');
+    btn.className = 'sign-node';
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+    btn.setAttribute('aria-label', s.name);
+    btn.textContent = s.glyph;
+    btn.addEventListener('click', () => selectSign(i, btn));
+    wheel.appendChild(btn);
+  });
+}
+
+const luckyColors = ["Lacivert","Bebek Pembesi","Altın Sarısı","Zümrüt Yeşili","Mor","Turkuaz","Bordo","Gümüş"];
+
+function dailySeed(str){
+  const today = new Date().toDateString();
+  const combined = str + today;
+  let hash = 0;
+  for (let i = 0; i < combined.length; i++){
+    hash = (hash * 31 + combined.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
+
+function selectSign(i, btn){
+  document.querySelectorAll('.sign-node').forEach(n => n.classList.remove('active'));
+  btn.classList.add('active');
+  const s = signs[i];
+  const seed = dailySeed(s.name);
+  const luckyNumber = (seed % 49) + 1;
+  const luckyColor = luckyColors[seed % luckyColors.length];
+
+  panel.innerHTML = `
+    <span class="glyph">${s.glyph}</span>
+    <h3 class="display">${s.name}</h3>
+    <div class="dates mono">${s.dates}</div>
+    <p class="body-text">${s.text}</p>
+    <div class="meta">
+      <div>Element<strong>${s.element}</strong></div>
+      <div>Yönetici Gezegen<strong>${s.planet}</strong></div>
+    </div>
+    <div class="meta">
+      <div>Şanslı Sayı<strong>${luckyNumber}</strong></div>
+      <div>Şanslı Renk<strong>${luckyColor}</strong></div>
+    </div>
+    <div class="share-row">
+      <button class="share-btn" id="shareSignBtn">📤 Paylaş</button>
+    </div>
+  `;
+
+  const shareBtn = document.getElementById('shareSignBtn');
+  shareBtn.addEventListener('click', () => {
+    shareOrCopy(`${s.glyph} ${s.name} burcu bugün: ${s.text} (gokbilir.github.io)`, shareBtn);
+  });
+
+  localStorage.setItem('gokbilir_lastSeenSign', JSON.stringify({ date: new Date().toDateString(), sign: s.name }));
+  renderSeenBadge();
+}
+
+function renderSeenBadge(){
+  const wrap = document.getElementById('seenBadgeWrap');
+  const raw = localStorage.getItem('gokbilir_lastSeenSign');
+  if (!raw){ wrap.innerHTML = ''; return; }
+  const data = JSON.parse(raw);
+  if (data.date === new Date().toDateString()){
+    wrap.innerHTML = `<span class="seen-badge">✓ Bugün ${data.sign} burcuna baktın</span>`;
+  } else {
+    wrap.innerHTML = '';
+  }
+}
+
+renderSignNodes();
+selectSign(0, wheel.querySelector('.sign-node'));
+
+const opts = { day:'numeric', month:'long', year:'numeric' };
+document.getElementById('todayLabel').textContent = new Date().toLocaleDateString('tr-TR', opts);
+
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.sign-node').forEach(n => n.remove());
+  renderSignNodes();
+});
+
+/* ---------- Burç Uyumu ---------- */
+const matchSelect1 = document.getElementById('matchSign1');
+const matchSelect2 = document.getElementById('matchSign2');
+const matchResult = document.getElementById('matchResult');
+
+signs.forEach((s, i) => {
+  const opt1 = document.createElement('option');
+  opt1.value = i; opt1.textContent = `${s.glyph} ${s.name}`;
+  matchSelect1.appendChild(opt1);
+  const opt2 = opt1.cloneNode(true);
+  matchSelect2.appendChild(opt2);
+});
+matchSelect2.selectedIndex = 1;
+
+const matchNotes = [
+  "Bu ikili birbirini tamamlayan enerjilere sahip, doğal bir uyum söz konusu.",
+  "Ortak noktalarınız güçlü ama farklılıklarınız da öğreticidir; sabırla büyüyen bir bağ olabilir.",
+  "Farklı hızlarda hareket ediyorsunuz — anlayış gösterirseniz zengin bir denge kurabilirsiniz."
+];
+
+document.getElementById('matchBtn').addEventListener('click', () => {
+  const i1 = parseInt(matchSelect1.value, 10);
+  const i2 = parseInt(matchSelect2.value, 10);
+  const s1 = signs[i1], s2 = signs[i2];
+  const pairKey = [s1.name, s2.name].sort().join('-');
+  let hash = 0;
+  for (let i = 0; i < pairKey.length; i++) hash = (hash * 31 + pairKey.charCodeAt(i)) >>> 0;
+  const pct = 55 + (hash % 41); // 55-95 arası, aynı çift her zaman aynı sonucu verir
+  const note = matchNotes[hash % matchNotes.length];
+  matchResult.innerHTML = `
+    <div class="pct display">%${pct}</div>
+    <p style="margin:10px 0 16px; color:var(--pink); font-family:'Spectral',serif; font-size:1.1rem;">${s1.glyph} ${s1.name} & ${s2.glyph} ${s2.name}</p>
+    <p>${note}</p>
+  `;
+});
+
+/* ---------- Enneagram Testi ---------- */
+const enneagramTypes = [
+  { id:1, name:"Mükemmeliyetçi",
+    statements:["Bir işi yapacaksam doğru yapmak isterim, yarım bırakmaktan hoşlanmam.","Hatalara karşı içimde sürekli bir eleştirmen sesi vardır."],
+    result:"Doğruyu ve düzeni önemsersin, işini en iyi şekilde yapmaya çalışırsın. Kendine karşı biraz daha hoşgörülü olmak seni rahatlatabilir." },
+  { id:2, name:"Yardımsever",
+    statements:["Başkalarının ihtiyaçlarını kendi ihtiyaçlarımdan önce fark ederim.","Sevildiğimi hissetmek için genelde önce ben veririm."],
+    result:"Başkalarına destek olmak seni anlamlı hissettirir. Kendi ihtiyaçlarını da unutmamak, ilişkilerinde dengeyi korumana yardımcı olur." },
+  { id:3, name:"Başarı Odaklı",
+    statements:["Hedeflerime ulaşmak beni gerçekten motive eder, durmayı sevmem.","Başarılı görünmek benim için oldukça önemli."],
+    result:"Hedeflerine ulaşmak seni harekete geçirir, verimli olmayı seversin. Bazen sonuçtan çok sürecin kendisinden keyif almayı denemek iyi gelebilir." },
+  { id:4, name:"Bireyci",
+    statements:["Kendimi çoğu zaman diğerlerinden farklı hissederim.","Duygularım yoğun ve derindir, onları anlamlandırmaya çalışırım."],
+    result:"Özgünlüğün ve duygusal derinliğin en güçlü yanların. Kendini başkalarıyla kıyaslamak yerine kendi hikayene odaklanmak seni özgürleştirebilir." },
+  { id:5, name:"Araştırmacı",
+    statements:["Bir konuyu iyice araştırmadan fikir beyan etmekten çekinirim.","Kalabalıktan çok, tek başıma düşünme zamanına ihtiyaç duyarım."],
+    result:"Bilgiye aç, gözlemci ve bağımsızsın. Bazen düşünmekten çıkıp harekete geçmek, öğrendiklerini hayata geçirmene yardımcı olur." },
+  { id:6, name:"Sorgulayıcı",
+    statements:["Bir karar vermeden önce olası riskleri düşünmeden duramam.","Güvendiğim insanlara karşı oldukça sadığımdır."],
+    result:"Güvenilir ve temkinlisin, sevdiklerine karşı sadıksın. Belirsizlikle daha rahat baş edebilmek içindeki kaygıyı hafifletebilir." },
+  { id:7, name:"Coşkulu",
+    statements:["Yeni deneyimler ve fikirler beni heyecanlandırır.","Sıkıcı ya da tekdüze bir hayattan hoşlanmam."],
+    result:"Hayata dair meraklı ve enerjik bir bakışın var. Bazen bir konuda derinleşmek için yavaşlamak seni daha da tatmin edebilir." },
+  { id:8, name:"Meydan Okuyan",
+    statements:["Haksızlık gördüğümde sesimi çıkarmaktan çekinmem.","Kontrolü elimde tutmayı, başkasına bırakmaktan tercih ederim."],
+    result:"Güçlü, dürüst ve kararlısın, adaletsizliğe tahammülün yok. Zaman zaman kontrolü biraz bırakmak ilişkilerinde yumuşaklık katabilir." },
+  { id:9, name:"Barışsever",
+    statements:["Çatışmadan kaçınıp ortamı sakin tutmayı tercih ederim.","Başkalarının bakış açısını anlamak benim için kolaydır."],
+    result:"Sakin, uzlaştırıcı ve anlayışlısın. Kendi isteklerini de net bir şekilde dile getirmek, ihtiyaçlarının görülmesini sağlar." }
+];
+
+const quizList = document.getElementById('quizList');
+let statementIdx = 0;
+enneagramTypes.forEach(t => {
+  t.statements.forEach(st => {
+    const id = `q${statementIdx++}`;
+    const label = document.createElement('label');
+    label.className = 'quiz-item';
+    label.setAttribute('for', id);
+    label.innerHTML = `<input type="checkbox" id="${id}" data-type="${t.id}"><span>${st}</span>`;
+    quizList.appendChild(label);
+  });
+});
+
+document.getElementById('quizBtn').addEventListener('click', () => {
+  const scores = {};
+  document.querySelectorAll('#quizList input[type="checkbox"]:checked').forEach(cb => {
+    const tid = cb.dataset.type;
+    scores[tid] = (scores[tid] || 0) + 1;
+  });
+  const quizResult = document.getElementById('quizResult');
+  if (Object.keys(scores).length === 0){
+    quizResult.style.display = 'block';
+    quizResult.innerHTML = '<p style="color:var(--text-dim);">En az bir ifade seçmelisin.</p>';
+    return;
+  }
+  const topId = Object.keys(scores).sort((a, b) => scores[b] - scores[a])[0];
+  const topType = enneagramTypes.find(t => t.id === parseInt(topId, 10));
+  quizResult.style.display = 'block';
+  quizResult.innerHTML = `
+    <div class="type-name display">Tip ${topType.id} — ${topType.name}</div>
+    <p>Sen bir ${topType.name}'sin. ${topType.result}</p>
+  `;
+  quizResult.scrollIntoView({ behavior:'smooth', block:'center' });
+});
+
+/* ---------- Geçmiş Yaşam Testi ---------- */
+const pastLives = {
+  1: { name:"Mısırlı Kraliyet Danışmanı", text:"Stratejik zekan ve derin sezgilerinle, güçlü kararların arkasındaki akıl sen olabilirdin." },
+  2: { name:"Ortaçağ Şövalyesi", text:"Onurun ve cesaretinle, inandığın değerler uğruna sonuna kadar mücadele eden biriydin." },
+  3: { name:"İpek Yolu Tüccarı", text:"Meraklı ve uyumlu ruhunla, kültürler arasında köprü kuran bir gezgindin." },
+  4: { name:"Rönesans Sanatçısı", text:"Yaratıcılığın ve duyarlılığınla, güzelliği görünür kılan biriydin." },
+  5: { name:"Viking Kâşifi", text:"Özgür ruhun ve cesaretinle, bilinmeyen ufuklara açılmaktan hiç korkmadın." },
+  6: { name:"Antik Yunan Filozofu", text:"Derin düşüncen ve sorgulayan zihninle, hayatın büyük sorularının peşindeydin." }
+};
+
+const plQuestions = [
+  { q:"Bir hafta sonunu nasıl geçirmek istersin?", options:[
+    [1,"Sarayda stratejik kararlar üzerine kafa yorarak"],
+    [2,"Zorlu bir mücadeleye girip cesaretimi sınayarak"],
+    [3,"Uzak bir pazarda yeni insanlarla tanışıp hikaye toplayarak"],
+    [4,"Bir tuval başında ilham peşinde koşarak"],
+    [5,"Bilinmeyen bir kıyıya doğru yelken açarak"],
+    [6,"Derin sorular üzerine sessizce düşünerek"] ] },
+  { q:"Seni en çok ne heyecanlandırır?", options:[
+    [1,"Gizli bir bilgiye ya da sırra ulaşmak"],
+    [2,"Doğru bildiğim bir şey için mücadele etmek"],
+    [3,"Farklı kültürlerden yeni şeyler öğrenmek"],
+    [4,"Güzel bir şey yaratmak"],
+    [5,"Bilinmeyeni keşfetmek"],
+    [6,"Büyük soruların cevabını aramak"] ] },
+  { q:"Bir sorunla karşılaştığında ilk tepkin nedir?", options:[
+    [1,"Sakin kalıp uzun vadeli bir strateji kurarım"],
+    [2,"Doğrudan karşısına çıkıp çözerim"],
+    [3,"Esnek davranıp farklı yollar denerim"],
+    [4,"Duygularımı ifade edecek bir yol ararım"],
+    [5,"Riski göze alıp cesurca ilerlerim"],
+    [6,"Önce durup meseleyi sorgularım"] ] },
+  { q:"Etrafındakiler seni nasıl tanımlar?", options:[
+    [1,"Bilge ve güvenilir"],
+    [2,"Onurlu ve sadık"],
+    [3,"Sıcakkanlı ve meraklı"],
+    [4,"Duyarlı ve yaratıcı"],
+    [5,"Özgür ruhlu ve cesur"],
+    [6,"Derin düşünen ve mantıklı"] ] },
+  { q:"Hayalindeki mekan neresi olurdu?", options:[
+    [1,"İhtişamlı bir saray kütüphanesi"],
+    [2,"Yüksek surları olan bir kale"],
+    [3,"Kalabalık, renkli bir pazar yeri"],
+    [4,"Işıkla dolu bir atölye"],
+    [5,"Fırtınalı bir denizin ortasında bir gemi"],
+    [6,"Antik bir agoranın sütunları arasında"] ] },
+  { q:"Seni en çok tanımlayan kelime hangisi?", options:[
+    [1,"Stratejist"],
+    [2,"Onur"],
+    [3,"Merak"],
+    [4,"İlham"],
+    [5,"Özgürlük"],
+    [6,"Bilgelik"] ] }
+];
+
+const plQuizWrap = document.getElementById('plQuizWrap');
+plQuestions.forEach((item, qi) => {
+  const block = document.createElement('div');
+  block.style.marginBottom = '32px';
+  const title = document.createElement('h3');
+  title.className = 'display';
+  title.style.fontSize = '1.1rem';
+  title.style.marginBottom = '12px';
+  title.textContent = `${qi + 1}. ${item.q}`;
+  block.appendChild(title);
+  const list = document.createElement('div');
+  list.className = 'quiz-list';
+  item.options.forEach(([tid, label], oi) => {
+    const id = `pl${qi}_${oi}`;
+    const lbl = document.createElement('label');
+    lbl.className = 'quiz-item';
+    lbl.setAttribute('for', id);
+    lbl.innerHTML = `<input type="radio" id="${id}" name="plq${qi}" value="${tid}"><span>${label}</span>`;
+    list.appendChild(lbl);
+  });
+  block.appendChild(list);
+  plQuizWrap.appendChild(block);
+});
+
+document.getElementById('plQuizBtn').addEventListener('click', () => {
+  const scores = {};
+  let answered = 0;
+  plQuestions.forEach((item, qi) => {
+    const checked = document.querySelector(`input[name="plq${qi}"]:checked`);
+    if (checked){
+      answered++;
+      scores[checked.value] = (scores[checked.value] || 0) + 1;
+    }
+  });
+  const plQuizResult = document.getElementById('plQuizResult');
+  if (answered < plQuestions.length){
+    plQuizResult.style.display = 'block';
+    plQuizResult.innerHTML = `<p style="color:var(--text-dim);">Sonucu görmek için tüm soruları cevaplaman gerekiyor (${answered}/${plQuestions.length}).</p>`;
+    plQuizResult.scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+  const topId = Object.keys(scores).sort((a, b) => scores[b] - scores[a])[0];
+  const result = pastLives[topId];
+  plQuizResult.style.display = 'block';
+  plQuizResult.innerHTML = `
+    <div class="type-name display">${result.name}</div>
+    <p>Bir önceki hayatında bir ${result.name} olabilirdin. ${result.text}</p>
+  `;
+  plQuizResult.scrollIntoView({ behavior:'smooth', block:'center' });
+});
+
+/* ---------- Tarot Çarkı ---------- */
+const tarotCards = [
+  {name:"Deli", glyph:"🃏", text:"Yeni bir başlangıcın eşiğindesin. Bilinmeyene adım atmaktan çekinme, bugün saflığın en büyük gücün."},
+  {name:"Büyücü", glyph:"🪄", text:"Elindeki araçlar zaten yeterli. Bugün harekete geçmek için mükemmel koşulları beklemeyi bırak."},
+  {name:"Azize", glyph:"🕯️", text:"İçindeki sessiz bilgiye kulak ver. Bugün cevap dışarıda değil, senin sezgilerinde."},
+  {name:"İmparatoriçe", glyph:"🌸", text:"Bolluk ve yaratıcılık seninle. Kendine ve emeğine biraz daha şefkat göster."},
+  {name:"İmparator", glyph:"👑", text:"Yapı kurma zamanı. Bugün disiplinli bir adım, uzun vadede sana güven verecek."},
+  {name:"Aziz", glyph:"⛪", text:"Geleneksel bir yoldan ders çıkarabilirsin. Bir akıl hocasının sözü bugün değerli olabilir."},
+  {name:"Aşıklar", glyph:"💞", text:"Bir seçim seni bekliyor. Kalbinin sesini mantığınla birlikte dinle."},
+  {name:"Savaş Arabası", glyph:"🏇", text:"İrade gücün bugün yüksek. Dağınık enerjini tek bir hedefe yönlendirirsen ilerlersin."},
+  {name:"Güç", glyph:"🦁", text:"Gerçek güç bağırmakta değil, sabırda. Bugün nazikçe ama kararlılıkla ilerle."},
+  {name:"Ermiş", glyph:"🏮", text:"Biraz yalnız kalmak sana iyi gelecek. Cevap, gürültüden uzaklaştığında netleşiyor."},
+  {name:"Kader Çarkı", glyph:"🎡", text:"Döngüler değişiyor. Kontrol edemediğin şeyi kabullenmek bugün sana huzur getirir."},
+  {name:"Adalet", glyph:"⚖️", text:"Dengeyi gözet. Bugün verdiğin bir karar, adil olduğun ölçüde sana geri dönecek."},
+  {name:"Asılan Adam", glyph:"🙃", text:"Bazen ilerlemek için durup bakış açını değiştirmek gerekir. Bugün beklemek de bir eylemdir."},
+  {name:"Ölüm", glyph:"🥀", text:"Bir şey bitiyor ki yenisi başlasın. Kapanışa direnmek yerine bırakmayı dene."},
+  {name:"Denge", glyph:"🌊", text:"Uçlardan kaçın. Bugün ölçülü bir orta yol, hem sana hem çevrene iyi gelecek."},
+  {name:"Şeytan", glyph:"⛓️", text:"Seni bağlayan şey belki de kendi alışkanlığın. Bugün o zinciri fark etmek ilk adım."},
+  {name:"Kule", glyph:"⚡", text:"Ani bir değişiklik sarsıcı gelebilir ama gerçek bir temel bırakır. Sağlam olanı koru."},
+  {name:"Yıldız", glyph:"⭐", text:"Umut bugün haklı. Küçük bir iyileşme, büyük bir yenilenmenin habercisi olabilir."},
+  {name:"Ay", glyph:"🌙", text:"Her şey göründüğü gibi olmayabilir. Bugün belirsizlikle sabırla yüzleş."},
+  {name:"Güneş", glyph:"☀️", text:"Açıklık ve neşe seninle. Bugün planların için doğru zaman olabilir."},
+  {name:"Mahkeme", glyph:"📯", text:"Geçmişle yüzleşip bir sonuca varma zamanı. Kendine dürüst bir değerlendirme yap."},
+  {name:"Dünya", glyph:"🌍", text:"Bir döngü tamamlanıyor. Bugün emeğinin karşılığını almaya başlayabilirsin."}
+];
+
+const tarotWheel = document.getElementById('tarotWheel');
+const spinBtn = document.getElementById('spinBtn');
+const tarotResult = document.getElementById('tarotResult');
+const segAngle = 360 / tarotCards.length;
+
+function buildTarotWheel(){
+  document.querySelectorAll('.tarot-node').forEach(n => n.remove());
+  const stops = [];
+  tarotCards.forEach((c, i) => {
+    const color = i % 2 === 0 ? '#1b2050' : '#241a3a';
+    stops.push(`${color} ${i*segAngle}deg ${(i+1)*segAngle}deg`);
+  });
+  tarotWheel.style.background = `conic-gradient(${stops.join(',')})`;
+
+  const r = tarotWheel.offsetWidth * 0.38;
+  tarotCards.forEach((c, i) => {
+    const midAngle = (i + 0.5) * segAngle;
+    const rad = (midAngle - 90) * (Math.PI / 180);
+    const x = Math.cos(rad) * r;
+    const y = Math.sin(rad) * r;
+    const node = document.createElement('div');
+    node.className = 'tarot-node';
+    node.style.transform = `translate(${x}px, ${y}px)`;
+    node.textContent = c.glyph;
+    tarotWheel.appendChild(node);
+  });
+}
+
+buildTarotWheel();
+
+let spinning = false;
+spinBtn.addEventListener('click', () => {
+  if (spinning) return;
+  spinning = true;
+  spinBtn.disabled = true;
+
+  const idx = Math.floor(Math.random() * tarotCards.length);
+  const targetMid = (idx + 0.5) * segAngle;
+  const extraSpins = 6;
+  const rotation = extraSpins * 360 + (360 - targetMid);
+
+  tarotWheel.style.transition = 'none';
+  tarotWheel.style.transform = 'rotate(0deg)';
+  void tarotWheel.offsetWidth;
+
+  requestAnimationFrame(() => {
+    tarotWheel.style.transition = 'transform 4.2s cubic-bezier(0.17, 0.67, 0.32, 1)';
+    tarotWheel.style.transform = `rotate(${rotation}deg)`;
+  });
+
+  setTimeout(() => {
+    const c = tarotCards[idx];
+    tarotResult.innerHTML = `
+      <div class="card-name display">${c.glyph} ${c.name}</div>
+      <p>${c.text}</p>
+      <div class="share-row" style="justify-content:center;">
+        <button class="share-btn" id="shareTarotBtn">📤 Paylaş</button>
+      </div>
+    `;
+    document.getElementById('shareTarotBtn').addEventListener('click', function(){
+      shareOrCopy(`${c.glyph} Günün tarot kartım: ${c.name} — ${c.text} (gokbilir.github.io)`, this);
+    });
+    spinning = false;
+    spinBtn.disabled = false;
+  }, 4300);
+});
+
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.tarot-node').forEach(n => n.remove());
+  buildTarotWheel();
+});
+
+/* ---------- İsim Rehberi ---------- */
+const babyNames = {
+  kiz: [
+    ["Ayşe","Yaşayan, hayat dolu"],["Fatma","Sütten kesilmiş, saf"],
+    ["Zeynep","Değerli mücevher, hoş kokulu ağaç"],["Meryem","Yüce, saygın"],["Hatice","Erken doğan, saygın kadın"],
+    ["Emine","Güvenilir, emin"],["Zehra","Parlak, ışıltılı"],["Merve","Mekke'de bir tepenin adı"],
+    ["Ecrin","Sevap, mükafat"],["Defne","Defne ağacı, zafer sembolü"],["Azra","Bakire, el değmemiş"],
+    ["Asel","Bal"],["İpek","İpek kumaş, yumuşaklık"],["Yağmur","Yağmur"],["Deniz","Deniz"],
+    ["Cansu","Can suyu, hayat kaynağı"],["Ceren","Ceylan yavrusu"],["Duru","Berrak, temiz"],
+    ["Ebrar","İyiler, hayırlı kimseler"],["Eylül","Eylül ayı"],["Gizem","Sır, esrar"],
+    ["Gonca","Açmamış çiçek"],["Hazal","Sonbaharda dökülen yaprak, hafiflik"],["İlayda","Ay ışığıyla birlikte"],
+    ["İrem","Cennet bahçesi"],["Kader","Alınyazısı"],["Kübra","Büyük, ulu"],["Lale","Lale çiçeği"],
+    ["Melek","Melek"],["Melis","Bal arısını çeken bitki, melisa"],["Mina","İnce, zarif cam"],
+    ["Miray","Ay ışığı gibi güzel"],["Nehir","Irmak"],["Nil","Nil nehri"],["Nisa","Kadınlar"],
+    ["Nur","Işık, aydınlık"],["Nazlı","İnce, nazenin"],["Öykü","Hikaye"],["Pelin","Pelin otu, acı ama şifalı bitki"],
+    ["Rüya","Düş"],["Selin","Sel gibi coşkun akan"],["Sena","Övgü, yücelik"],["Seren","Yol gösteren, ışık saçan"],
+    ["Sude","Süt gibi beyaz, temiz"],["Sıla","Kavuşma, memlekete dönüş"],["Şevval","Hicri takvimde bir ay adı"],
+    ["Tuana","Cennet ağacı"],["Yasemin","Yasemin çiçeği"],["Zümra","Zümrüt yeşili"],["Aslı","Gerçek, öz"],
+    ["Asya","Teselli eden; kıta adı"],["Aylin","Ay haleli, ay ışığıyla aydınlanan"],["Beren","Güçlü, sağlam"],
+    ["Berrak","Duru, temiz"],["Beyza","Beyaz, tertemiz"],["Buse","Öpücük"],["Ceyda","Işıltılı, parlak"],
+    ["Çiçek","Çiçek"],["Damla","Su damlası"],["Derya","Deniz, engin"],["Doğa","Tabiat"],["Dila","Gönül, kalp"],
+    ["Ebru","Kağıt üzerine su ile yapılan sanat"],["Ela","Ela renkli göz"],["Esila","Temeller, kökler"],
+    ["Esra","Gece yürüyüşü"],["Eda","Naz, cilve"],["Gamze","Yanak çukuru"],
+    ["Gül","Gül çiçeği"],["Gülsüm","Yanakları dolgun güzel"],["Hilal","Yeni ay, ayça"],
+    ["Hümeyra","Beyaz tenli, esmer güzeli"],["Işıl","Parıltı"],["İdil","Bahar, hoş ve kolay yaşam"],
+    ["Lara","Tatlı, sevimli"],["Leyla","Gece; klasik bir aşk hikayesinin kahramanı"],["Masal","Hikaye, öykü"],
+    ["Naz","İnce, cilveli tavır"],["Neva","Ahenk, ezgi"],["Nilay","Nil nehri gibi güzel ay"],
+    ["Nisan","Nisan ayı"],["Özge","Başka, kendine has, öz"],["Perihan","Peri gibi güzel hükümdar"],
+    ["Pınar","Kaynak suyu"],["Reyhan","Fesleğen, hoş kokulu bitki"],["Selen","Sel gibi coşkun"],
+    ["Simge","Sembol"],["Şeyma","Güzel huylu"],["Tuğçe","Bayrak, sancak"],["Umay","Bereket ve doğum tanrıçası (eski Türk inancı)"],
+    ["Yaren","Dost, arkadaş"],["Zerrin","Altın gibi, altın renkli"],["Zeliha","Güzel, parlak"],["Ada","Ada"],
+    ["Bahar","İlkbahar mevsimi"],["Canan","Sevgili, gönülden sevilen"],["Dilara","Gönül süsleyen, sevgili"],
+    ["Elis","Zarif, ince"],["Filiz","Yeni sürgün, taze fidan"],["Günnur","Gün ışığı"],["Havva","İlk kadın"],
+    ["İclal","Yüceltme, ululama"],["Jale","Çiy tanesi"],["Kevser","Cennette bir havuz; bolluk"],
+    ["Lalezar","Lale bahçesi"],["Mahinur","Ay gibi aydınlık"],["Narin","İnce, zarif"],["Oya","İğne oyası; oyalayan"],
+    ["Öznur","Öz ışık, saf aydınlık"],["Sema","Gökyüzü"],["Şule","Alev, parıltı"],["Tülay","Tül gibi ince ay"],
+    ["Ülkü","İdeal, amaç"],["Vildan","Çocuklar, evlatlar"],
+    ["Nilgün","Nil renginde, güzel gün"],["Nida","Seslenme, çağrı"],["Nuray","Nur ve ay'ın birleşimi, ışıklı ay"],
+    ["İlknur","İlk ışık"],["Fadime","Fatma isminin halk ağzındaki söylenişi; sütten kesilmiş, saf"],["Melahat","Güzellik, letafet"]
+  ],
+  erkek: [
+    ["Ahmet","Övülmüş, övülmeye layık"],["Mehmet","Övülmüş"],["Mustafa","Seçilmiş"],["Ali","Yüce, yüksek"],
+    ["Hüseyin","Güzel, iyi huylu"],["Hasan","Güzel, iyi"],["İbrahim","Halkların babası"],
+    ["Yusuf","Allah artırsın, çoğaltsın"],["Ömer","Uzun ömürlü, hayat dolu"],["Osman","Genç yılan; bir hanedan adı"],
+    ["Emre","Sevgili, dost"],["Kemal","Olgunluk, mükemmellik"],["Cem","Toplantı, meclis"],["Can","Ruh, hayat"],
+    ["Deniz","Deniz"],["Kaan","Hükümdar, hanların hanı"],["Kağan","Hükümdar"],["Ege","Ulu, büyük"],
+    ["Berk","Sağlam, güçlü"],["Burak","Şimşek, parıltı"],["Efe","Yiğit, kabadayı"],["Eren","Ermiş, veli"],
+    ["Onur","Şeref, saygınlık"],["Selim","Sağlam, kusursuz, esen"],["Sinan","Mızrak ucu, keskin"],
+    ["Tolga","Miğfer"],["Tuna","Tuna nehri, güçlü akış"],["Umut","Ümit"],["Volkan","Yanardağ"],
+    ["Yiğit","Cesur, kahraman"],["Alp","Kahraman, yiğit"],["Alper","Yiğit erkek"],
+    ["Arda","İz bırakan; nehir adı"],["Atakan","Ata soyundan gelen"],["Baran","Yağmur"],
+    ["Barış","Huzur, sulh"],["Batuhan","Güçlü hükümdar"],["Bora","Fırtına"],["Cenk","Savaş"],
+    ["Çınar","Çınar ağacı, köklü"],["Doğukan","Doğudan gelen soy"],["Emir","Buyruk sahibi, önder"],
+    ["Ediz","Yüce, ulu"],["Erdem","Fazilet"],["Fatih","Fetheden"],["Furkan","Hak ile batılı ayıran"],
+    ["Görkem","İhtişam"],["Gökhan","Gök hükümdarı"],["Halil","Dost, içten sevilen"],["Hakan","Hükümdar"],
+    ["İlkay","İlk ay, yeni başlangıç"],["Kerem","Cömertlik"],["Koray","Ateş gibi parlak ay"],
+    ["Levent","Yiğit delikanlı"],["Mert","Yiğit, cömert, dürüst"],["Metin","Sağlam, dayanıklı"],
+    ["Murat","İstek, arzu"],["Oğuz","Temiz soylu, saf"],["Orhan","Şehrin hanı"],["Ozan","Halk şairi"],
+    ["Rüzgar","Rüzgar"],["Salih","İyi, dürüst"],["Taner","Şafak vakti doğan"],["Tarık","Sabah yıldızı"],
+    ["Tayfun","Şiddetli fırtına"],["Toprak","Toprak"],["Uğur","Şans, iyi talih"],["Ulaş","Erişen, kavuşan"],
+    ["Utku","Zafer"],["Yasin","Kur'an'da bir sure adı"],["Yavuz","Sert, güçlü, azimli"],["Zafer","Utku"],
+    ["Adem","İlk insan"],["Bilal","İlk müezzinin adı"],["Cihan","Dünya"],["Doruk","Zirve"],
+    ["Ferhat","Sevinç, mutluluk"],["Gürkan","Güçlü soydan"],["Kaya","Sert taş, sarsılmaz"],
+    ["Kutay","Kutlu ay"],["Necati","Kurtuluş"],["Nihat","Yaradılış, huy"],["Polat","Çelik"],
+    ["Sarp","Dik, sert, çıkılması zor"],["Sercan","Baş can, önder ruh"],["Suat","Mutluluk"],
+    ["Şahin","Yırtıcı kuş, keskin bakışlı"],["Timur","Demir"],["Yılmaz","Yılmayan, azimli"],
+    ["Ata","Cet, baba, önder"],["Aras","Aras nehrinin adı"],["Batu","Sağlam, güçlü"],
+    ["Berkay","Sağlam ay"],["Bulut","Bulut"],["Çağan","Şölen, bayram"],["Doğan","Atılgan ve yiğit"],
+    ["Emrah","Emre'nin bir varyasyonu, sevgili"],["Enes","Dost, arkadaş canlısı"],["Erhan","Er ve hükümdar"],
+    ["Görkan","İhtişamlı soydan"],["Ilgın","Ilgın ağacı"],["İhsan","İyilik, bağış"],["Kadir","Güçlü, değerli"],
+    ["Kayra","Lütuf, iyilik"],["Kutluğ","Kutlu, uğurlu"],["Mirza","Prens, bey oğlu"],["Nadir","Az bulunur, ender"],
+    ["Poyraz","Kuzeydoğu rüzgarı"],["Sami","Yüksek, yüce"],["Semih","Cömert"],["Tan","Şafak vakti"],
+    ["Vedat","Sevgi, dostluk"],["Yalın","Sade, katıksız"],["Yusuf Kerem","İki güzel ismin birleşimi"],["Ziya","Işık, aydınlık"],
+    ["Ömercan","Ömer ile can isimlerinin birleşimi; uzun ömürlü, sevgili"],
+    ["Saltuk","Saltuklu Beyliği'nden gelen eski Türk adı; güçlü, sağlam yapılı"],
+    ["Ünal","Ün kazan, tanın anlamında; şöhretli ol"],["Mithat","Övgü, methiye"]
+  ]
+};
+
+let currentGender = 'kiz';
+const nameGrid = document.getElementById('nameGrid');
+const nameCount = document.getElementById('nameCount');
+const nameSearch = document.getElementById('nameSearch');
+
+function renderNames(){
+  const query = nameSearch.value.trim().toLocaleLowerCase('tr-TR');
+  let list = babyNames[currentGender].filter(([n, m]) =>
+    n.toLocaleLowerCase('tr-TR').includes(query)
+  );
+  if (sortAZ){
+    list = [...list].sort((a, b) => a[0].localeCompare(b[0], 'tr-TR'));
+  }
+  nameCount.textContent = `${list.length} isim`;
+  if (list.length === 0){
+    nameGrid.innerHTML = '<div class="name-empty">Aramanla eşleşen isim bulunamadı.</div>';
+    return;
+  }
+  nameGrid.innerHTML = list.map(([n, m]) => `
+    <div class="name-item">
+      <div class="n display">${n}</div>
+      <div class="m">${m}</div>
+    </div>
+  `).join('');
+}
+
+document.querySelectorAll('.name-tab[data-gender]').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.name-tab[data-gender]').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentGender = tab.dataset.gender;
+    renderNames();
+  });
+});
+
+let sortAZ = false;
+const sortToggle = document.getElementById('sortToggle');
+sortToggle.addEventListener('click', () => {
+  sortAZ = !sortAZ;
+  sortToggle.classList.toggle('active', sortAZ);
+  sortToggle.textContent = sortAZ ? 'Varsayılan Sıra' : 'A-Z Sırala';
+  renderNames();
+});
+
+nameSearch.addEventListener('input', renderNames);
+renderNames();
+
+/* ---------- Bebek İsmi Önerici ---------- */
+const suggestGenderEl = document.getElementById('suggestGender');
+const suggestLetterEl = document.getElementById('suggestLetter');
+const suggestGrid = document.getElementById('suggestGrid');
+
+function populateLetters(){
+  const letters = new Set(babyNames[suggestGenderEl.value].map(([n]) => n[0].toLocaleUpperCase('tr-TR')));
+  suggestLetterEl.innerHTML = '<option value="">Harf farketmez</option>' +
+    [...letters].sort((a, b) => a.localeCompare(b, 'tr-TR')).map(l => `<option value="${l}">${l}</option>`).join('');
+}
+populateLetters();
+suggestGenderEl.addEventListener('change', populateLetters);
+
+document.getElementById('suggestBtn').addEventListener('click', () => {
+  const gender = suggestGenderEl.value;
+  const letter = suggestLetterEl.value;
+  let pool = babyNames[gender];
+  if (letter){
+    pool = pool.filter(([n]) => n[0].toLocaleUpperCase('tr-TR') === letter);
+  }
+  if (pool.length === 0){
+    suggestGrid.innerHTML = '<div class="name-empty">Bu harfte isim bulunamadı.</div>';
+    return;
+  }
+  const picks = [];
+  const usedIdx = new Set();
+  const count = Math.min(3, pool.length);
+  while (picks.length < count){
+    const idx = Math.floor(Math.random() * pool.length);
+    if (usedIdx.has(idx)) continue;
+    usedIdx.add(idx);
+    picks.push(pool[idx]);
+  }
+  suggestGrid.innerHTML = picks.map(([n, m]) => `
+    <div class="name-item">
+      <div class="n display">${n}</div>
+      <div class="m">${m}</div>
+    </div>
+  `).join('');
+});
+
+/* ---------- Rüya Tabirleri ---------- */
+const dreamThemes = [
+  ["Su","Bolluk, bereket ve ruhsal arınmaya işaret ettiğine inanılır."],
+  ["Yılan","Gizli bir düşman ya da bastırılmış bir korkuyla yüzleşmeye işaret eder."],
+  ["Diş Dökülmesi","Kayıp korkusu veya bir konudaki güvensizlikle ilişkilendirilir."],
+  ["Uçmak","Özgürlük arayışını ve hayatın kontrolünü ele alma isteğini simgeler."],
+  ["Düşmek","Bir konuda kontrolü kaybetme endişesine işaret eder."],
+  ["Ölüm","Genellikle bir dönemin kapanıp yeni bir başlangıcın gelmesiyle yorumlanır."],
+  ["Bebek","Yeni bir başlangıcı, masumiyeti veya sorumluluk duygusunu temsil eder."],
+  ["Düğün","Hayatta önemli bir birleşme veya karar anına işaret eder."],
+  ["Ev","Kişinin iç dünyasını ve güvenlik duygusunu simgeler."],
+  ["Yangın","Bastırılmış öfkeyi veya ani bir değişimi temsil eder."],
+  ["Deniz","Durgunsa iç huzuru, dalgalıysa duygusal karmaşayı simgeler."],
+  ["Balık","Bolluk, bereket ve gizli kalmış fırsatlarla ilişkilendirilir."],
+  ["Kedi","Bağımsızlığı ya da gizli kalmış bir hileyi simgeler."],
+  ["Köpek","Sadakati, dostluğu ya da korunma ihtiyacını simgeler."],
+  ["Kan","Yaşam enerjisini ya da yoğun bir duygusal yükü temsil eder."],
+  ["Para Bulmak","Beklenmedik bir fırsatı ya da değer görme isteğini simgeler."],
+  ["Altın","Değeri, başarıyı ve kalıcı kazanımları simgeler."],
+  ["Hırsız","Bir şeyi kaybetme korkusuna ya da güven sorununa işaret eder."],
+  ["Araba","Hayattaki yönü ve kontrolü elinde tutma isteğini temsil eder."],
+  ["Yol","Hayat yolculuğunu ve alınan kararları simgeler."],
+  ["Kaybolmak","Bir konuda yön bulamama, kararsızlık hissini yansıtır."],
+  ["Sınav","Kendini kanıtlama baskısı ya da performans kaygısıyla ilişkilendirilir."],
+  ["Koşmak","Bir şeyden kaçma isteğini ya da bir hedefe ulaşma çabasını simgeler."],
+  ["Merdiven","Çıkmak ilerlemeyi, yükselmeyi ve hedefe yaklaşmayı temsil eder."],
+  ["Kapı","Yeni bir fırsata ya da geçiş dönemine işaret eder."],
+  ["Ayna","Öz farkındalığı ve kendini sorgulamayı simgeler."],
+  ["Saç Kesmek","Bir değişim isteğini ya da geçmişten kopuşu temsil eder."],
+  ["Yılan Sokması","Sözlü bir saldırıya uğrama korkusuyla ilişkilendirilir."],
+  ["Yumurta","Yeni bir başlangıcı ve potansiyeli simgeler."],
+  ["Ekmek","Bereketi, emeği ve paylaşımı temsil eder."],
+  ["Olgun Meyve","Emeğin karşılığını almaya yaklaşıldığına işaret eder."],
+  ["Açan Çiçek","Mutluluğu, sevgiyi ve yeni fırsatları simgeler."],
+  ["Ağaç","Sağlam köklere sahip olma isteğini ve aile bağlarını temsil eder."],
+  ["Yağmur","Duygusal arınmayı ve yenilenmeyi simgeler."],
+  ["Kar","Sakinliği, durgunluğu ya da donmuş bir durumu temsil eder."],
+  ["Fırtına","İçsel çatışmayı ya da yaklaşan bir değişimi simgeler."],
+  ["Deprem","Hayattaki temel bir dengesizlik hissiyle ilişkilendirilir."],
+  ["Gökkuşağı","Umudun, uzlaşmanın ve iyi haberlerin habercisi olarak yorumlanır."],
+  ["Ay","Duygusal iniş çıkışları ve sezgi gücünü simgeler."],
+  ["Güneş","Açıklığı, canlılığı ve olumlu bir dönemi temsil eder."],
+  ["Yıldız","Umudu, dileği ve rehberlik arayışını simgeler."],
+  ["Uçak","Hızlı bir değişimi ya da uzak bir hedefe ulaşma isteğini temsil eder."],
+  ["Tren","Hayatta belirlenmiş bir yolda ilerleme hissini simgeler."],
+  ["Köprü","Bir geçiş dönemini ve iki durum arasında bağlantı kurmayı temsil eder."],
+  ["Anahtar","Bir soruna çözüm bulmayı ya da yeni bir fırsatı simgeler."],
+  ["Kilit","Çözülmemiş bir meseleyi ya da erişilemeyen bir hedefi temsil eder."],
+  ["Uçan Kuş","Özgürlüğü ve iyi haberlerin habercisi olarak yorumlanır."],
+  ["Örümcek","Sabrı, sabırlı emeği ya da hissedilen bir tuzağı simgeler."],
+  ["Karanlık","Belirsizliği, bilinmeyen korkusunu ya da fark edilmeyen bir konuyu temsil eder."],
+  ["Işık","Aydınlanmayı, umudu ve doğru yolu bulmayı simgeler."]
+];
+
+const dreamGrid = document.getElementById('dreamGrid');
+const dreamCount = document.getElementById('dreamCount');
+const dreamSearch = document.getElementById('dreamSearch');
+
+function renderDreams(){
+  const query = dreamSearch.value.trim().toLocaleLowerCase('tr-TR');
+  const list = dreamThemes.filter(([n]) => n.toLocaleLowerCase('tr-TR').includes(query));
+  dreamCount.textContent = `${list.length} tema`;
+  if (list.length === 0){
+    dreamGrid.innerHTML = '<div class="name-empty">Aramanla eşleşen bir rüya teması bulunamadı.</div>';
+    return;
+  }
+  dreamGrid.innerHTML = list.map(([n, m]) => `
+    <div class="name-item">
+      <div class="n display">${n}</div>
+      <div class="m">${m}</div>
+    </div>
+  `).join('');
+}
+
+dreamSearch.addEventListener('input', renderDreams);
+renderDreams();
+
+/* ---------- Bülten Formu ---------- */
+// NOT: Bu site backend'siz statik bir sitedir. Gerçek bir abone listesi
+// tutmak için Buttondown, Mailchimp veya Formspree gibi ücretsiz bir
+// servise bağlanman gerekir. Şimdilik e-postanı kendi adresine mailto
+// linkiyle iletiyor. AŞAĞIDAKİ "site-sahibi@ornek.com" kısmını kendi
+// gerçek e-posta adresinle değiştir.
+const OWNER_EMAIL = "site-sahibi@ornek.com";
+const newsletterForm = document.getElementById('newsletterForm');
+const newsletterNote = document.getElementById('newsletterNote');
+
+newsletterForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = document.getElementById('newsletterEmail').value.trim();
+  if (!email) return;
+  const subject = encodeURIComponent('Gökbilir Bülten Abonelik Talebi');
+  const body = encodeURIComponent(`Bu e-postayı bültene eklenmek için gönderiyorum: ${email}`);
+  window.location.href = `mailto:${OWNER_EMAIL}?subject=${subject}&body=${body}`;
+  newsletterNote.textContent = 'E-posta uygulaman açılıyor — göndermeyi onaylayınca talebin site sahibine ulaşır.';
+});
+
+
+/* ---------- Sayfa Yönlendirici (SPA) ---------- */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + id);
+  if (target) target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  if (id === 'burclar' && typeof renderSignNodes === 'function') renderSignNodes();
+  if (id === 'tarot' && typeof buildTarotWheel === 'function') buildTarotWheel();
+}
+
+document.querySelectorAll('[data-target]').forEach(el => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    showPage(el.dataset.target);
+  });
+});
+
+</script>
+</body>
+</html>
